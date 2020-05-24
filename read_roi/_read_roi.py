@@ -297,8 +297,8 @@ def extract_basic_roi_data(data):
             roi = {'type': 'polygon'}
 
         elif roi_type == ROI_TYPE['freehand']:
-            roi = {'type': 'freehand'}
             if subtype == SUBTYPES['ELLIPSE']:
+                roi = {'type': 'ellipse'}
                 ex1 = get_float(data, OFFSET['X1'])
                 ey1 = get_float(data, OFFSET['Y1'])
                 ex2 = get_float(data, OFFSET['X2'])
@@ -308,6 +308,8 @@ def extract_basic_roi_data(data):
                 roi.update(dict(ex1=ex1, ey1=ey1, ex2=ex2, ey2=ey2))
 
                 return roi, roi_props
+            else:
+                roi = {'type': 'freehand'}
 
         elif roi_type == ROI_TYPE['traced']:
             roi = {'type': 'traced'}
